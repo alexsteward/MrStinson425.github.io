@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Kojin Studios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --primary-red: #dc2626;
+            --primary-gold: #d4af37;
+            --secondary-navy: #2a3441;
+            --light-gold: #f4e999;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --background: #0f1419;
+            --card-bg: rgba(26, 35, 50, 0.8);
+            --gradient-primary: linear-gradient(135deg, #dc2626 0%, #d4af37 100%);
+            --gradient-secondary: linear-gradient(135deg, #1a2332 0%, #2a3441 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '⚔';
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .docs-nav {
+            list-style: none;
+        }
+
+        .docs-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .docs-nav .section-title {
+            color: var(--primary-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 1rem 0 0.5rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            margin: 1rem 0;
+        }
+
+        .docs-nav .section-title:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .docs-nav a {
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+        }
+
+        .docs-nav a:hover, .docs-nav a.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            border-left-color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        /* Content Area */
+        .content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-height: 600px;
+        }
+
+        .content h1 {
+            color: var(--text-light);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-gold);
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content h2 {
+            color: var(--text-light);
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        .content h3 {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .content h4 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1.5rem 2rem;
+            color: var(--text-gray);
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        .content code {
+            background: var(--primary-navy);
+            color: var(--primary-gold);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .content pre {
+            background: var(--primary-navy);
+            color: var(--text-light);
+            padding: 2rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-gold);
+            position: relative;
+        }
+
+        .content pre code {
+            background: none;
+            color: var(--text-light);
+            padding: 0;
+        }
+
+        .code-header {
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .content blockquote {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--primary-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+
+        .content blockquote::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            left: -2px;
+            background: var(--primary-gold);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .content blockquote p {
+            margin: 0;
+            color: var(--text-light);
+            font-style: italic;
+            padding-left: 2rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .info-box::before {
+            content: 'ℹ️';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--card-bg);
+            padding: 0 0.5rem;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--card-bg);
+            padding: 0 0.5rem;
+        }
+
+        .error-box {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .error-box::before {
+            content: '🚨';
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--card-bg);
+            padding: 0 0.5rem;
+        }
+
+        .info-box p, .warning-box p, .error-box p {
+            margin: 0;
+        }
+
+        /* Navigation Buttons */
+        .doc-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        .nav-btn.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Copy Button for Code Blocks */
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 6rem 1rem 4rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+                margin-top: 2rem;
+            }
+
+            .content {
+                order: 1;
+                padding: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                KOJIN STUDIOS
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="bots.html" class="nav-link">Bot Store</a></li>
+                <li><a href="#" class="nav-link active">Documentation</a></li>
+                <li><a href="support.html" class="nav-link">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar fade-in">
+            <h3>📚 Documentation</h3>
+            <ul class="docs-nav">
+                <li class="section-title">Getting Started</li>
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#quick-start">Quick Start</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                
+                <li class="section-title">API Reference</li>
+                <li><a href="#authentication">Authentication</a></li>
+                <li><a href="#endpoints">API Endpoints</a></li>
+                <li><a href="#webhooks">Webhooks</a></li>
+                <li><a href="#rate-limits">Rate Limits</a></li>
+                
+                <li class="section-title">Bot Guides</li>
+                <li><a href="#modguard">ModGuard Pro</a></li>
+                <li><a href="#musicmaster">MusicMaster</a></li>
+                <li><a href="#economycore">EconomyCore</a></li>
+                <li><a href="#eventmanager">EventManager</a></li>
+                
+                <li class="section-title">Advanced</li>
+                <li><a href="#custom-integrations">Custom Integrations</a></li>
+                <li><a href="#enterprise">Enterprise Features</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content fade-in" id="mainContent">
+            <h1>Welcome to Kojin Studios Documentation</h1>
+            
+            <p>Welcome to the comprehensive documentation for Kojin Studios' premium Discord bot ecosystem. Our documentation follows the principles of Japanese craftsmanship - precise, clear, and purposeful.</p>
+
+            <blockquote>
+                <p>"In the way of the craftsman, every tool must be understood completely before it can be wielded with mastery." - Our approach to documentation reflects this philosophy of thorough understanding.</p>
+            </blockquote>
+
+            <h2>🚀 Getting Started</h2>
+            
+            <p>Whether you're deploying your first bot or integrating advanced features, this documentation will guide you through every step of your journey with Kojin Studios.</p>
+
+            <h3>What You'll Learn</h3>
+            <ul>
+                <li><strong>Quick Setup:</strong> Get your bots running in minutes with our streamlined deployment process</li>
+                <li><strong>Configuration:</strong> Customize every aspect to match your server's unique requirements</li>
+                <li><strong>API Integration:</strong> Build custom solutions using our powerful REST API</li>
+                <li><strong>Advanced Features:</strong> Unlock enterprise-grade capabilities for large communities</li>
+            </ul>
+
+            <h2>🛠 Installation Process</h2>
+            
+            <p>Installing a Kojin Studios bot is designed to be intuitive and secure. Here's the basic process:</p>
+
+            <div class="info-box">
+                <p><strong>Prerequisites:</strong> Ensure you have Administrator permissions on your Discord server and a valid Kojin Studios account.</p>
+            </div>
+
+            <h4>Step 1: Choose Your Bot</h4>
+            <p>Browse our <a href="bots.html" style="color: var(--primary-gold);">Bot Store</a> and select the bot that best fits your community's needs.</p>
+
+            <h4>Step 2: Deploy to Server</h4>
+            <pre><code class="language-bash"># Example deployment command
+kojin deploy --bot=modguard-pro --server=YOUR_SERVER_ID --config=custom.json</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <h4>Step 3: Configure Settings</h4>
+            <p>Use our intuitive dashboard or configuration files to customize your bot's behavior.</p>
+
+            <pre><code class="language-json">{
+  "bot": "modguard-pro",
+  "settings": {
+    "automod": {
+      "enabled": true,
+      "sensitivity": "medium",
+      "actions": ["warn", "timeout", "ban"]
+    },
+    "logging": {
+      "channel": "#mod-logs",
+      "events": ["all"]
+    }
+  }
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <h2>🔐 Authentication</h2>
+            
+            <p>All API requests require authentication using your API key. Keep your keys secure and never expose them in client-side code.</p>
+
+            <h4>API Key Authentication</h4>
+            <pre><code class="language-bash"># Include your API key in the Authorization header
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+     -H "Content-Type: application/json" \
+     https://api.kojinstudios.com/v1/bots</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <div class="warning-box">
+                <p><strong>Security Note:</strong> Store your API keys in environment variables or secure configuration files. Never commit them to version control.</p>
+            </div>
+
+            <h3>SDK Authentication</h3>
+            <p>If you're using our official SDKs, authentication is handled automatically:</p>
+
+            <pre><code class="language-javascript">// JavaScript/Node.js
+const KojinClient = require('@kojin-studios/sdk');
+
+const client = new KojinClient({
+  apiKey: process.env.KOJIN_API_KEY,
+  environment: 'production'
+});
+
+// Authenticate and get bot status
+async function getBotStatus() {
+  try {
+    const response = await client.bots.getStatus('modguard-pro');
+    console.log('Bot Status:', response.data);
+  } catch (error) {
+    console.error('Authentication failed:', error.message);
+  }
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <h2>📊 API Endpoints</h2>
+            
+            <p>Our REST API provides programmatic access to all bot functions and server management features.</p>
+
+            <h3>Base URL</h3>
+            <p><code>https://api.kojinstudios.com/v1</code></p>
+
+            <h3>Common Endpoints</h3>
+            
+            <h4>Get Bot Information</h4>
+            <pre><code class="language-http">GET /bots/{bot_id}
+Authorization: Bearer YOUR_API_KEY
+
+Response:
+{
+  "id": "modguard-pro",
+  "name": "ModGuard Pro",
+  "status": "active",
+  "uptime": "99.98%",
+  "servers": 1247,
+  "features": ["automod", "logging", "custom-rules"]
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <h4>Update Bot Configuration</h4>
+            <pre><code class="language-http">PUT /bots/{bot_id}/config
+Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+
+{
+  "automod": {
+    "enabled": true,
+    "sensitivity": "high"
+  }
+}
+
+Response:
+{
+  "success": true,
+  "message": "Configuration updated successfully",
+  "timestamp": "2025-06-20T12:00:00Z"
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+            <h2>🎯 Best Practices</h2>
+            
+            <p>Follow these guidelines to get the most out of your Kojin Studios bots:</p>
+
+            <ul>
+                <li><strong>Regular Updates:</strong> Keep your bot configurations updated as your community grows</li>
+                <li><strong>Monitor Performance:</strong> Use our analytics dashboard to track bot effectiveness</li>
+                <li><strong>Custom Rules:</strong> Tailor moderation and automation rules to your community's culture</li>
+                <li><strong>Backup Configurations:</strong> Export your settings regularly for disaster recovery</li>
+            </ul>
+
+            <div class="error-box">
+                <p><strong>Important:</strong> Always test configuration changes in a staging environment before applying them to your live server.</p>
+            </div>
+
+            <h2>🆘 Need Help?</h2>
+            
+            <p>If you encounter any issues or have questions about implementation, our support team is here to help:</p>
+
+            <ul>
+                <li><strong>Live Chat:</strong> Available 24/7 through our <a href="support.html" style="color: var(--primary-gold);">support portal</a></li>
+                <li><strong>Email:</strong> <a href="mailto:developers@kojinstudios.com" style="color: var(--primary-gold);">developers@kojinstudios.com</a></li>
+                <li><strong>Community:</strong> Join our Discord server for community support</li>
+                <li><strong>Documentation:</strong> Search our comprehensive knowledge base</li>
+            </ul>
+
+            <!-- Navigation -->
+            <div class="doc-navigation">
+                <button class="nav-btn disabled">← Previous</button>
+                <button class="nav-btn" onclick="loadSection('quick-start')">Next: Quick Start →</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Documentation navigation
+        const navLinks = document.querySelectorAll('.docs-nav a');
+        const mainContent = document.getElementById('mainContent');
+
+        // Content sections
+        const contentSections = {
+            'introduction': {
+                title: 'Welcome to Kojin Studios Documentation',
+                content: `
+                    <p>Welcome to the comprehensive documentation for Kojin Studios' premium Discord bot ecosystem. Our documentation follows the principles of Japanese craftsmanship - precise, clear, and purposeful.</p>
+
+                    <blockquote>
+                        <p>"In the way of the craftsman, every tool must be understood completely before it can be wielded with mastery." - Our approach to documentation reflects this philosophy of thorough understanding.</p>
+                    </blockquote>
+
+                    <h2>🚀 Getting Started</h2>
+                    
+                    <p>Whether you're deploying your first bot or integrating advanced features, this documentation will guide you through every step of your journey with Kojin Studios.</p>
+
+                    <h3>What You'll Learn</h3>
+                    <ul>
+                        <li><strong>Quick Setup:</strong> Get your bots running in minutes with our streamlined deployment process</li>
+                        <li><strong>Configuration:</strong> Customize every aspect to match your server's unique requirements</li>
+                        <li><strong>API Integration:</strong> Build custom solutions using our powerful REST API</li>
+                        <li><strong>Advanced Features:</strong> Unlock enterprise-grade capabilities for large communities</li>
+                    </ul>
+
+                    <h2>🎯 Philosophy</h2>
+                    <p>At Kojin Studios, we believe that great tools should be invisible - they should enhance your community without getting in the way. Our bots are designed with this principle in mind, offering powerful features through intuitive interfaces.</p>
+
+                    <div class="info-box">
+                        <p><strong>New to Discord bots?</strong> Start with our <a href="#quick-start" style="color: var(--primary-gold);">Quick Start Guide</a> to get up and running in minutes.</p>
+                    </div>
+                `
+            },
+            'quick-start': {
+                title: 'Quick Start Guide',
+                content: `
+                    <p>Get your first Kojin Studios bot up and running in under 5 minutes. This guide will walk you through the essential steps.</p>
+
+                    <h2>🏁 Prerequisites</h2>
+                    <ul>
+                        <li>Discord server with Administrator permissions</li>
+                        <li>Kojin Studios account (create one at our <a href="bots.html" style="color: var(--primary-gold);">Bot Store</a>)</li>
+                        <li>Basic understanding of Discord server management</li>
+                    </ul>
+
+                    <h2>Step 1: Choose Your Bot</h2>
+                    <p>Visit our Bot Store and select a bot that matches your needs. For beginners, we recommend starting with <strong>WelcomeWave</strong> or <strong>ModGuard Pro</strong>.</p>
+
+                    <h2>Step 2: Add to Server</h2>
+                    <ol>
+                        <li>Click "Deploy Now" on your chosen bot</li>
+                        <li>Select your Discord server from the dropdown</li>
+                        <li>Review and accept the required permissions</li>
+                        <li>Click "Authorize" to complete the installation</li>
+                    </ol>
+
+                    <h2>Step 3: Basic Configuration</h2>
+                    <p>After installation, configure your bot using Discord slash commands:</p>
+
+                    <pre><code>/kojin setup
+/kojin config show
+/kojin help</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <div class="warning-box">
+                        <p><strong>Important:</strong> Make sure the bot has the necessary permissions in the channels where you want it to operate.</p>
+                    </div>
+
+                    <h2>🎉 You're Ready!</h2>
+                    <p>Your bot is now active and ready to enhance your Discord server. Check out the individual bot guides for advanced configuration options.</p>
+                `
+            },
+            'authentication': {
+                title: 'API Authentication',
+                content: `
+                    <p>Secure authentication is the foundation of our API. Learn how to properly authenticate your requests and manage API keys.</p>
+
+                    <h2>🔑 API Keys</h2>
+                    <p>All API requests require a valid API key. You can generate and manage your keys from the developer dashboard.</p>
+
+                    <h3>Creating an API Key</h3>
+                    <ol>
+                        <li>Log in to your Kojin Studios account</li>
+                        <li>Navigate to the Developer Dashboard</li>
+                        <li>Click "Generate New API Key"</li>
+                        <li>Name your key and set appropriate permissions</li>
+                        <li>Store the key securely - it won't be shown again</li>
+                    </ol>
+
+                    <h2>Authentication Methods</h2>
+                    
+                    <h3>Bearer Token (Recommended)</h3>
+                    <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \\
+     https://api.kojinstudios.com/v1/bots</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <h3>Header Authentication</h3>
+                    <pre><code class="language-bash">curl -H "X-API-Key: YOUR_API_KEY" \\
+     https://api.kojinstudios.com/v1/bots</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <h2>SDK Authentication</h2>
+                    <p>Our official SDKs handle authentication automatically:</p>
+
+                    <pre><code class="language-javascript">const KojinClient = require('@kojin-studios/sdk');
+
+const client = new KojinClient({
+  apiKey: process.env.KOJIN_API_KEY,
+  environment: 'production'
+});
+
+// The SDK automatically includes authentication headers
+const bots = await client.bots.list();</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <div class="error-box">
+                        <p><strong>Security Warning:</strong> Never expose API keys in client-side code or public repositories. Use environment variables or secure configuration files.</p>
+                    </div>
+                `
+            },
+            'modguard': {
+                title: 'ModGuard Pro Documentation',
+                content: `
+                    <p>ModGuard Pro is our flagship moderation bot, featuring advanced AI-powered content filtering and automated moderation systems.</p>
+
+                    <h2>🛡️ Core Features</h2>
+                    <ul>
+                        <li><strong>AI Content Filtering:</strong> Advanced machine learning for context-aware moderation</li>
+                        <li><strong>Automated Actions:</strong> Customizable punishment hierarchies</li>
+                        <li><strong>Comprehensive Logging:</strong> Detailed audit trails for all moderation actions</li>
+                        <li><strong>Custom Rules:</strong> Server-specific moderation rules and exceptions</li>
+                    </ul>
+
+                    <h2>Quick Setup</h2>
+                    <p>After adding ModGuard Pro to your server, use these commands to get started:</p>
+
+                    <pre><code>/modguard setup
+/modguard automod enable
+/modguard logging channel #mod-logs</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <h2>Configuration Options</h2>
+                    
+                    <h3>AutoMod Settings</h3>
+                    <pre><code class="language-json">{
+  "automod": {
+    "enabled": true,
+    "sensitivity": "medium",
+    "filters": {
+      "spam": true,
+      "profanity": true,
+      "links": false,
+      "mentions": true
+    },
+    "actions": {
+      "first_offense": "warn",
+      "second_offense": "timeout_5m",
+      "third_offense": "timeout_1h",
+      "fourth_offense": "ban"
+    }
+  }
+}</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+
+                    <h3>Advanced AI Filtering</h3>
+                    <p>ModGuard Pro uses advanced natural language processing to understand context and intent, not just keywords.</p>
+
+                    <div class="info-box">
+                        <p><strong>AI Learning:</strong> The AI system learns from your moderation decisions to better understand your community's standards over time.</p>
+                    </div>
+
+                    <h2>API Integration</h2>
+                    <p>Integrate ModGuard Pro with external systems using our REST API:</p>
+
+                    <pre><code class="language-bash"># Get moderation statistics
+curl -H "Authorization: Bearer YOUR_API_KEY" \\
+     "https://api.kojinstudios.com/v1/bots/modguard-pro/stats"
+
+# Update automod settings
+curl -X PUT \\
+     -H "Authorization: Bearer YOUR_API_KEY" \\
+     -H "Content-Type: application/json" \\
+     -d '{"sensitivity": "high"}' \\
+     "https://api.kojinstudios.com/v1/bots/modguard-pro/config"</code><button class="copy-btn" onclick="copyCode(this)">Copy</button></pre>
+                `
+            }
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Get the section ID
+                const sectionId = this.getAttribute('href').replace('#', '');
+                
+                // Load content
+                loadSection(sectionId);
+            });
+        });
+
+        function loadSection(sectionId) {
+            const section = contentSections[sectionId];
+            
+            if (section) {
+                mainContent.innerHTML = `
+                    <h1>${section.title}</h1>
+                    ${section.content}
+                    <div class="doc-navigation">
+                        <button class="nav-btn" onclick="navigateToPrevious('${sectionId}')">← Previous</button>
+                        <button class="nav-btn" onclick="navigateToNext('${sectionId}')">Next →</button>
+                    </div>
+                `;
+            } else {
+                mainContent.innerHTML = `
+                    <h1>Coming Soon</h1>
+                    <p>This section is currently under development. We're working hard to bring you comprehensive documentation for all features.</p>
+                    <div class="info-box">
+                        <p><strong>Need help now?</strong> Contact our support team at <a href="support.html" style="color: var(--primary-gold);">support@kojinstudios.com</a> for immediate assistance.</p>
+                    </div>
+                `;
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToNext(currentSection) {
+            const sections = Object.keys(contentSections);
+            const currentIndex = sections.indexOf(currentSection);
+            if (currentIndex < sections.length - 1) {
+                const nextSection = sections[currentIndex + 1];
+                loadSection(nextSection);
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${nextSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        function navigateToPrevious(currentSection) {
+            const sections = Object.keys(contentSections);
+            const currentIndex = sections.indexOf(currentSection);
+            if (currentIndex > 0) {
+                const prevSection = sections[currentIndex - 1];
+                loadSection(prevSection);
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${prevSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.previousElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--gradient-primary)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            });
+        }
+
+        // Search functionality
+        function addSearchBar() {
+            const searchHTML = `
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="text" id="docSearch" placeholder="Search documentation..." 
+                           style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.1); 
+                                  border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; 
+                                  color: var(--text-light); font-size: 0.9rem;">
+                </div>
+            `;
+            
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.insertAdjacentHTML('afterbegin', searchHTML);
+            
+            const searchInput = document.getElementById('docSearch');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const navItems = document.querySelectorAll('.docs-nav a');
+                
+                navItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    const parent = item.parentElement;
+                    
+                    if (text.includes(searchTerm) || searchTerm === '') {
+                        parent.style.display = 'block';
+                    } else {
+                        parent.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            addSearchBar();
+            
+            // Add fade-in animation
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Mobile menu toggle
+        function createMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContainer = document.querySelector('.main-container');
+            
+            const mobileToggle = document.createElement('button');
+            mobileToggle.innerHTML = '📚 Menu';
+            mobileToggle.className = 'mobile-docs-toggle';
+            mobileToggle.style.cssText = `
+                display: none;
+                position: fixed;
+                top: 6rem;
+                left: 1rem;
+                background: var(--gradient-primary);
+                color: white;
+                border: none;
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                z-index: 1001;
+            `;
+            
+            // Add mobile styles
+            const mobileStyles = document.createElement('style');
+            mobileStyles.textContent = `
+                @media (max-width: 768px) {
+                    .mobile-docs-toggle { display: block !important; }
+                    .sidebar { 
+                        position: fixed;
+                        top: 0;
+                        left: -100%;
+                        height: 100vh;
+                        width: 300px;
+                        transition: left 0.3s ease;
+                        z-index: 1000;
+                        overflow-y: auto;
+                    }
+                    .sidebar.active { left: 0; }
+                    .main-container { grid-template-columns: 1fr; }
+                }
+            `;
+            document.head.appendChild(mobileStyles);
+            
+            mobileToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+            
+            document.body.appendChild(mobileToggle);
+        }
+
+        createMobileMenu();
+    </script>
+</body>
+</html>
