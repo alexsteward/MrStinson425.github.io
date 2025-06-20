@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Kojin Studios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-navy: #1a2332;
+            --primary-red: #dc2626;
+            --primary-gold: #d4af37;
+            --secondary-navy: #2a3441;
+            --light-gold: #f4e999;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --background: #0f1419;
+            --card-bg: rgba(26, 35, 50, 0.8);
+            --gradient-primary: linear-gradient(135deg, #dc2626 0%, #d4af37 100%);
+            --gradient-secondary: linear-gradient(135deg, #1a2332 0%, #2a3441 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '⚔';
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-gold);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .emergency-alert {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #ef4444 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+        }
+
+        .emergency-alert h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .emergency-alert p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 2rem;
+        }
+
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Support Options Grid */
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .support-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .support-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .support-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .support-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .support-details {
+            color: var(--primary-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-btn {
+            background: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .support-btn:hover {
+            background: var(--primary-gold);
+            color: var(--primary-navy);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 4rem;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-section .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-gray);
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-gold);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-icon {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Status Indicators */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .status-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .status-operational { background: #10b981; }
+        .status-maintenance { background: #f59e0b; }
+        .status-down { background: #ef4444; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-section {
+                padding: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .chat-widget::before {
+            content: '💬';
+            font-size: 1.2rem;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"></div>
+                KOJIN STUDIOS
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="bots.html" class="nav-link">Bot Store</a></li>
+                <li><a href="docs.html" class="nav-link">Documentation</a></li>
+                <li><a href="#" class="nav-link active">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Expert Support When You Need It</h1>
+            <p>Our dedicated support team combines technical expertise with the patience and attention to detail that defines Japanese customer service.</p>
+            
+            <div class="emergency-alert">
+                <h3>🚨 Emergency Support Available</h3>
+                <p>Critical issues affecting your server? Our emergency hotline is available 24/7 at <strong>+1-800-KOJIN-911</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Support Options -->
+            <div class="support-grid fade-in">
+                <div class="support-card">
+                    <div class="support-icon">💬</div>
+                    <h3>Live Chat Support</h3>
+                    <p>Get instant help from our expert support team. Available 24/7 with average response time under 2 minutes.</p>
+                    <div class="support-details">Available Now</div>
+                    <a href="#" class="support-btn" onclick="openLiveChat()">Start Chat</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>Detailed technical assistance via email. Perfect for complex issues that require documentation and screenshots.</p>
+                    <div class="support-details">Response within 2 hours</div>
+                    <a href="#contact-form" class="support-btn">Send Email</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">🎥</div>
+                    <h3>Video Consultation</h3>
+                    <p>Screen-sharing sessions for hands-on troubleshooting, training, and advanced configuration assistance.</p>
+                    <div class="support-details">Schedule required</div>
+                    <a href="#" class="support-btn" onclick="scheduleVideo()">Book Session</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">📞</div>
+                    <h3>Phone Support</h3>
+                    <p>Direct line to our technical experts for urgent issues and complex integrations requiring immediate attention.</p>
+                    <div class="support-details">+1-800-KOJIN-HELP</div>
+                    <a href="tel:+18005654648" class="support-btn">Call Now</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">🏢</div>
+                    <h3>Enterprise Support</h3>
+                    <p>Dedicated account management, priority support, and custom SLA agreements for enterprise customers.</p>
+                    <div class="support-details">Custom SLA available</div>
+                    <a href="#" class="support-btn">Learn More</a>
+                </div>
+
+                <div class="support-card">
+                    <div class="support-icon">🌐</div>
+                    <h3>Community Forum</h3>
+                    <p>Connect with other users, share best practices, and get help from our community of Discord bot experts.</p>
+                    <div class="support-details">Free • Always open</div>
+                    <a href="#" class="support-btn">Join Forum</a>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="fade-in">
+                <h2 style="text-align: center; color: var(--text-light); margin-bottom: 2rem; font-size: 2rem;">System Status</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-indicator status-operational"></span>
+                        <strong>API Services</strong><br>
+                        <small style="color: var(--text-gray);">All systems operational</small>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator status-operational"></span>
+                        <strong>Bot Network</strong><br>
+                        <small style="color: var(--text-gray);">99.9% uptime</small>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator status-operational"></span>
+                        <strong>Dashboard</strong><br>
+                        <small style="color: var(--text-gray);">Fully operational</small>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator status-operational"></span>
+                        <strong>Support Systems</strong><br>
+                        <small style="color: var(--text-gray);">Online</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <section class="contact-section fade-in" id="contact-form">
+                <h2>Submit a Support Request</h2>
+                <p class="subtitle">Provide detailed information about your issue for faster resolution</p>
+                
+                <form id="supportForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company/Server Name</label>
+                            <input type="text" id="company" name="company" placeholder="Optional">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priority">Priority Level *</label>
+                            <select id="priority" name="priority" required>
+                                <option value="">Select Priority</option>
+                                <option value="low">Low - General question</option>
+                                <option value="medium">Medium - Non-urgent issue</option>
+                                <option value="high">High - Urgent problem</option>
+                                <option value="critical">Critical - Service down</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Issue Category</label>
+                            <select id="category" name="category">
+                                <option value="">Select Category</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="billing">Billing & Account</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="integration">Integration Help</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bot">Related Bot (if applicable)</label>
+                            <select id="bot" name="bot">
+                                <option value="">Select Bot</option>
+                                <option value="modguard-pro">ModGuard Pro</option>
+                                <option value="musicmaster">MusicMaster</option>
+                                <option value="economycore">EconomyCore</option>
+                                <option value="eventmanager">EventManager</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Brief description of your issue">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="message">Detailed Description *</label>
+                            <textarea id="message" name="message" required placeholder="Please provide as much detail as possible including:&#10;• Steps to reproduce the issue&#10;• Expected vs actual behavior&#10;• Any error messages&#10;• Screenshots (if applicable)&#10;• When the issue started"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Support Request</button>
+                </form>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section fade-in">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How quickly do you respond to support requests?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We aim to respond to all support requests within 2 hours during business hours (24/7 coverage). Critical issues are addressed immediately, often within 15 minutes. Enterprise customers receive priority support with guaranteed response times based on their SLA.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What information should I include in my support request?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Please include: detailed description of the issue, steps to reproduce, expected vs actual behavior, any error messages, screenshots if applicable, which bot is affected, your server ID, and when the issue started. The more details you provide, the faster we can resolve your issue.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you offer support in languages other than English?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! We offer comprehensive support in English and Japanese. Our bilingual team can assist you in your preferred language. We also provide basic support in Spanish, French, and German through our multilingual support specialists.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I schedule a consultation for complex integrations?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! We offer video consultations and screen-sharing sessions for complex technical discussions, training, and guided integrations. These sessions can be scheduled through our support portal or by contacting our team directly.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's included in enterprise support?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Enterprise support includes: dedicated account manager, priority support queue, custom SLA agreements, phone support, video consultations, integration assistance, training sessions, and 24/7 emergency support. Contact us for a custom quote based on your needs.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I report a security vulnerability?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Security issues should be reported immediately to security@kojinstudios.com. Please do not post security vulnerabilities in public forums or general support channels. We follow responsible disclosure practices and will acknowledge security reports within 24 hours.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget pulse" onclick="openLiveChat()">
+        Live Support
+    </div>
+
+    <script>
+        // Form submission handling
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const priority = document.getElementById('priority').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && priority && subject && message) {
+                // Generate ticket ID
+                const ticketId = 'KS-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                
+                // Show success message
+                alert(`✅ Support request submitted successfully!\n\nTicket ID: ${ticketId}\n\nWe'll respond within 2 hours. You'll receive email updates at ${email}`);
+                
+                // Reset form
+                this.reset();
+                
+                // Optional: Send to actual backend
+                // submitToBackend(formData);
+            } else {
+                alert('❌ Please fill in all required fields marked with *');
+            }
+        });
+
+        // FAQ Toggle functionality
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.faq-icon');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                    item.querySelector('.faq-icon').textContent = '+';
+                }
+            });
+            
+            // Toggle current item
+            if (faqItem.classList.contains('active')) {
+                faqItem.classList.remove('active');
+                answer.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                faqItem.classList.add('active');
+                answer.classList.add('active');
+                icon.textContent = '−';
+            }
+        }
+
+        // Live chat functionality
+        function openLiveChat() {
+            // In a real implementation, this would open your live chat widget
+            alert('🔄 Connecting you to live support...\n\nPlease wait while we find an available agent.\n\nEstimated wait time: < 2 minutes');
+            
+            // Simulate connection
+            setTimeout(() => {
+                alert('✅ Connected to Support Agent!\n\nAgent: Hi! I\'m here to help. How can I assist you today?');
+            }, 2000);
+        }
+
+        // Video consultation scheduling
+        function scheduleVideo() {
+            alert('📅 Video Consultation Scheduling\n\nRedirecting to our calendar booking system...\n\nAvailable time slots:\n• Today: 2:00 PM, 4:30 PM\n• Tomorrow: 10:00 AM, 1:00 PM, 3:30 PM');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 200);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        function createMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const navContainer = document.querySelector('.nav-container');
+            
+            const mobileToggle = document.createElement('button');
+            mobileToggle.innerHTML = '☰';
+            mobileToggle.className = 'mobile-toggle';
+            mobileToggle.style.cssText = `
+                display: none;
+                background: none;
+                border: none;
+                color: var(--primary-gold);
+                font-size: 1.5rem;
+                cursor: pointer;
+            `;
+            
+            // Add mobile styles
+            const mobileStyles = document.createElement('style');
+            mobileStyles.textContent = `
+                @media (max-width: 768px) {
+                    .mobile-toggle { display: block !important; }
+                    .nav-menu { 
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: var(--primary-navy);
+                        flex-direction: column;
+                        padding: 2rem;
+                        gap: 1rem;
+                        border-top: 1px solid rgba(212, 175, 55, 0.2);
+                    }
+                    .nav-menu.active { display: flex; }
+                    .chat-widget { bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; }
+                }
+            `;
+            document.head.appendChild(mobileStyles);
+            
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            
+            navContainer.appendChild(mobileToggle);
+        }
+
+        createMobileMenu();
+
+        // Auto-update system status (simulated)
+        function updateSystemStatus() {
+            const statusItems = document.querySelectorAll('.status-indicator');
+            // In a real app, this would fetch actual status from an API
+            // For demo purposes, we'll keep everything operational
+        }
+
+        // Call status update every 30 seconds
+        setInterval(updateSystemStatus, 30000);
+    </script>
+</body>
+</html>
